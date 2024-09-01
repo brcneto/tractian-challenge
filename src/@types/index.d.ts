@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ICompany {
   id: string;
   name: string;
@@ -22,9 +24,11 @@ export interface IAsset {
 
 type ITreeItem = {
   id: string;
-  label: string;
+  label: {
+    icon: string;
+    title: string;
+  };
   children?: TreeNode[];
-  type: "location" | "asset" | "component";
   data: ILocation | IAsset;
   status?: string | null;
 };
