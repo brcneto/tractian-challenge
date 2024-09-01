@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { ITreeItem } from "@/@types";
+import { Icon } from "@iconify-icon/react";
+import { useState } from "react";
 
-type TreeItemProps = ITreeItem;
-
-function TreeItem({ item }: { item: TreeItemProps }) {
+function TreeItem({ item }: { item: ITreeItem }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const hasChildren = item.children && item.children.length > 0;
@@ -14,8 +13,10 @@ function TreeItem({ item }: { item: TreeItemProps }) {
     <li>
       <div className="flex items-center" onClick={() => setIsOpen(!isOpen)}>
         {hasChildren && (
-          <span className="cursor-pointer mr-2">{isOpen ? "-" : "+"}</span>
-        )}
+          <span className="cursor-pointer mr-2">
+            {isOpen ? <Icon icon="material-symbols:keyboard-arrow-up"/> : <Icon icon="material-symbols:keyboard-arrow-down"/>}
+          </span>
+        )}     
         <span>{item.label}</span>
       </div>
       {hasChildren && isOpen && (
@@ -31,7 +32,7 @@ function TreeItem({ item }: { item: TreeItemProps }) {
 
 export default function TreeView({ data }: { data: ITreeItem[] }) {
   return (
-    <ul>
+    <ul className="select-none">
       {data.map((data) => (
         <TreeItem key={data.id} item={data} />
       ))}
