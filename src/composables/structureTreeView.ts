@@ -6,9 +6,11 @@ export function structureTree(locations: ILocation[], assets: IAsset[]) {
       .filter((location) => location.parentId === parentId)
       .map((location) => ({
         id: location.id,
-        label: location.name,
+        label: {
+          icon: "material-symbols:location-on-outline",
+          title: location.name,
+        },
         data: location,
-        type: "location",
         children: [
           ...buildLocationTree(location.id),
           ...buildAssetTree(location.id),
@@ -23,8 +25,12 @@ export function structureTree(locations: ILocation[], assets: IAsset[]) {
       )
       .map((asset) => ({
         id: asset.id,
-        label: asset.name,
-        type: asset.sensorType ? "component" : "asset",
+        label: {
+          icon: asset?.sensorType
+            ? "material-symbols-light:component-exchange"
+            : "tabler:cube",
+          title: asset.name,
+        },
         status: asset.status || null,
         data: asset,
         children: buildAssetTree(asset.id),
@@ -32,4 +38,8 @@ export function structureTree(locations: ILocation[], assets: IAsset[]) {
   };
 
   return [...buildLocationTree(null)];
+}
+
+export function isComponent(data: IAsset | ILocation): data is IAsset {
+  return (data as IAsset).sensorType !== undefined;
 }

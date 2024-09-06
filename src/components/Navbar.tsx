@@ -23,7 +23,10 @@ export default async function Navbar() {
 
         <ul className="flex items-center gap-[10px]">
           {resCompanies.map((company) => (
-            <NavLink key={company.id} href={company.id}>
+            <NavLink
+              key={company.id}
+              href={`${company.id}?name=${encodeURIComponent(company.name)}`}
+            >
               {company.name}
             </NavLink>
           ))}
