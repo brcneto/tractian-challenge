@@ -33,7 +33,6 @@ export default function CompanyPage({
   useEffect(() => {
     getData();
   }, []);
-  console.log(selectedItem);
 
   if (!companyData) return <div>Loading...</div>;
 
