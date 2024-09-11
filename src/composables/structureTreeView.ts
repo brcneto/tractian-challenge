@@ -40,6 +40,6 @@ export function structureTree(locations: ILocation[], assets: IAsset[]) {
   return [...buildLocationTree(null)];
 }
 
-export function isComponent(data: IAsset | ILocation): data is IAsset {
-  return (data as IAsset).sensorType !== undefined;
+export function checkIfComponent(data: IAsset | ILocation): data is IAsset {
+  return !!(data as IAsset).sensorType;
 }
