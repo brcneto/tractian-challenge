@@ -7,7 +7,7 @@ export default async function Navbar() {
   const resCompanies = await Company.getCompanies();
 
   return (
-    <header className="w-full p-3 bg-navbar">
+    <header className="w-full p-3 h-12 bg-navbar">
       <div className="flex items-center justify-between max-w-[1400px] mx-auto">
         <h1>
           <Link href="/">
