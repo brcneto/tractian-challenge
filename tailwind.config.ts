@@ -15,6 +15,8 @@ const config: Config = {
       },
       colors: {
         primary: "#2188FF",
+        success: "#52C41A",
+        warning: "#ED3833"
       },
       backgroundColor: {
         navbar: "#17192D",
