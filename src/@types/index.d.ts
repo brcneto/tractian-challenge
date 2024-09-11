@@ -16,8 +16,8 @@ export interface IAsset {
   name: string;
   parentId?: string | null;
   sensorId?: string | null;
-  sensorType?: string | null;
-  status?: string | null;
+  sensorType?: "vibration" | "energy" | null;
+  status?: "alert" | "operating" | null;
   gatewayId?: string | null;
   locationId?: string | null;
 }
