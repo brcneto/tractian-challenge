@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${inter.className} bg-[#E3EAEF] flex flex-col h-full`}>
         <Navbar />
-        <main className="max-w-[1400px] m-2 w-full h-[calc(100%-64px)] flex rounded-[4px] bg-white border border-[#D8DFE6] mx-auto overflow-auto">
+        <main className="max-w-[1400px] m-2 w-full h-[calc(100%-64px)] flex rounded-[4px] bg-white border border-[#D8DFE6] mx-auto ">
           {children}
         </main>
       </body>

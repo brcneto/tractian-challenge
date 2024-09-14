@@ -39,6 +39,60 @@ export function structureTree(locations: ILocation[], assets: IAsset[]) {
 
   return [...buildLocationTree(null)];
 }
+export function filterTree(
+  items: ITreeItem[],
+  searchValue: string,
+  filterByStatus: boolean,
+  filterBySensorType: boolean
+): ITreeItem[] {
+  return items
+    .map((item) => {
+      const matchTitle = item.label.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase());
+
+      // Verificar se o item é um ativo (IAsset)
+      const isComponent = "gatewayId" in item.data;
+      console.log(isComponent, item.label.title);
+
+      const matchStatus =
+        filterByStatus && isComponent
+          ? (item.data as IAsset)?.status === "alert"
+          : filterByStatus
+          ? false
+          : true;
+
+      const matchSensorType =
+        filterBySensorType && isComponent
+          ? (item.data as IAsset)?.sensorType === "energy"
+          : filterBySensorType
+          ? false
+          : true;
+
+      // Recursivamente filtrar os filhos
+      const filteredChildren = item.children
+        ? filterTree(
+            item.children,
+            searchValue,
+            filterByStatus,
+            filterBySensorType
+          )
+        : [];
+
+      const matchesCurrentItem =
+        isComponent && matchTitle && matchStatus && matchSensorType;
+
+      if (matchesCurrentItem || filteredChildren.length > 0) {
+        return {
+          ...item,
+          children: filteredChildren,
+        };
+      }
+
+      return null;
+    })
+    .filter((item) => item !== null);
+}
 
 export function checkIfComponent(data: IAsset | ILocation): data is IAsset {
   return !!(data as IAsset).sensorType;

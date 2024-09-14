@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IAsset, ITreeItem } from "@/@types";
 import { Icon } from "@iconify-icon/react";
 import { cn } from "@/utils";
@@ -9,12 +9,14 @@ import ComponentTag from "../ComponentTag";
 
 interface TreeItemProps {
   item: ITreeItem;
+  hasFilter: boolean;
   setSelectedItem: (item: IAsset) => void;
   selectedItemId?: string;
 }
 
 export default function TreeItem({
   item,
+  hasFilter,
   setSelectedItem,
   selectedItemId,
 }: TreeItemProps) {
@@ -23,6 +25,14 @@ export default function TreeItem({
   const hasChildren = item.children && item.children.length > 0;
   const isComponent = checkIfComponent(item.data);
   const isSelected = item.id === selectedItemId;
+
+  useEffect(() => {
+    if (hasFilter) setIsOpen(true);
+  }, [hasFilter]);
+
+  const handleClickOpenItem = () => {
+    if (!hasFilter) setIsOpen((prev) => !prev);
+  };
 
   const handleSelectItem = () => {
     if (!isComponent) return;
@@ -35,7 +45,7 @@ export default function TreeItem({
         className={cn("flex w-full items-center justify-start ", {
           "cursor-pointer": hasChildren,
         })}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClickOpenItem}
       >
         {hasChildren && (
           <span className="flex items-center">
@@ -55,9 +65,9 @@ export default function TreeItem({
           </span>
         )}
         <div
-          data-isComponent={isComponent}
-          data-isSelected={isSelected}
-          className=" flex items-center w-full gap-1 data-[isComponent=true]:cursor-pointer data-[isSelected=true]:bg-primary data-[isSelected=true]:text-white"
+          data-iscomponent={isComponent}
+          data-isselected={isSelected}
+          className=" flex items-center w-full gap-1 data-[iscomponent=true]:cursor-pointer data-[isselected=true]:bg-primary data-[isselected=true]:text-white"
           onClick={handleSelectItem}
         >
           <Icon
@@ -82,6 +92,7 @@ export default function TreeItem({
             {item.children?.map((child) => (
               <TreeItem
                 key={child.id}
+                hasFilter={hasFilter}
                 item={child}
                 setSelectedItem={setSelectedItem}
                 selectedItemId={selectedItemId}

@@ -28,7 +28,14 @@ type ITreeItem = {
     icon: string;
     title: string;
   };
-  children?: TreeNode[];
+  children?: ITreeItem[];
   data: ILocation | IAsset;
   status?: string | null;
 };
+
+export interface IFilterTreeProps {
+  data: ITreeItem[];
+  searchInputValue: string;
+  filterByStatus: boolean;
+  filterBySensorType: boolean;
+}
