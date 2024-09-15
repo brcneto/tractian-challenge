@@ -1,3 +1,15 @@
+# Videos
+
+##Jaguar
+https://github.com/user-attachments/assets/e10b3383-8940-47c2-8b66-90dfb6e4998b
+
+##Tobias
+https://github.com/user-attachments/assets/03397885-5943-4180-a3de-1a84e3cc578d
+
+##Apex
+https://github.com/user-attachments/assets/6bedde99-8cf5-485e-a031-878013fedee0
+
+
 # Suggested Improvements
 
 ## 1. Data Structure Optimization
