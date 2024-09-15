@@ -51,9 +51,7 @@ export function filterTree(
         .toLowerCase()
         .includes(searchValue.toLowerCase());
 
-      // Verificar se o item é um ativo (IAsset)
       const isComponent = "gatewayId" in item.data;
-      console.log(isComponent, item.label.title);
 
       const matchStatus =
         filterByStatus && isComponent
@@ -69,7 +67,6 @@ export function filterTree(
           ? false
           : true;
 
-      // Recursivamente filtrar os filhos
       const filteredChildren = item.children
         ? filterTree(
             item.children,
